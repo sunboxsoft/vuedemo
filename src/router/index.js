@@ -11,10 +11,17 @@ export default new Router({
             component: HelloWorld
         },
         {
+
             path: '/layoutt',
             name: 'LayoutT',
             component: () =>
                 import ('../components/LayoutT.vue')
+        },
+        {
+            path: '/spacet',
+            name: 'SpaceT',
+            component: () =>
+                import ('../components/SpaceT.vue')
         }
-    ],
+    ]
 })
