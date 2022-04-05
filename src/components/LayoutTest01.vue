@@ -1,42 +1,23 @@
 <template>
-  <div id="app">
-    <!-- <img src="./assets/logo.png"> -->
+  <div>
     <a-layout id="components-layout-demo-custom-trigger">
       <a-layout-sider v-model="collapsed" :trigger="null" collapsible>
         <div class="logo" />
-        <a-menu
-          theme="dark"
-          mode="inline"
-          :default-selected-keys="['1']"
-          @click="handleClick"
-        >
+        <a-menu theme="dark" mode="inline" :default-selected-keys="['1']">
           <a-menu-item key="1">
-            <router-link to="/spacet">
-              <a-icon type="step-forward" />
-              <a-icon type="user" />
-              <span> spacet </span></router-link
-            >
+            <a-icon type="step-forward" />
+            <a-icon type="user" />
+            <span>nav 1</span>
           </a-menu-item>
           <a-menu-item key="2">
-            <router-link to="/layoutt">
-              <a-icon type="step-forward" />
-              <a-icon type="user" />
-              <span> layoutt</span>
-            </router-link>
+            <a-icon type="step-forward" />
+            <a-icon type="user" />
+            <span>nav 1</span>
           </a-menu-item>
           <a-menu-item key="3">
-            <router-link to="/">
-              <a-icon type="step-forward" />
-              <a-icon type="user" />
-              <span>HelloWorld</span></router-link
-            >
-          </a-menu-item>
-          <a-menu-item key="4">
-            <router-link to="/testcomponent">
-              <a-icon type="step-forward" />
-              <a-icon type="user" />
-              <span>testcomponent</span></router-link
-            >
+            <a-icon type="step-forward" />
+            <a-icon type="user" />
+            <span>nav 1</span>
           </a-menu-item>
         </a-menu>
       </a-layout-sider>
@@ -60,28 +41,23 @@
         </a-layout-content>
       </a-layout>
     </a-layout>
-    <!-- {{ defaultSelectedKeys }} -->
+    <a-button type="primary" shape="circle" icon="download" :size="size">
+    </a-button>
   </div>
 </template>
 
 <script>
 export default {
-  name: "App",
+  name: "LayoutTest01",
   data() {
     return {
       collapsed: false,
     };
   },
-  created() {
-    this.defaultSelectedKeys = localStorage.getItem("path") || '3';
-  },
-  methods: {
-    handleClick(e) {
-      console.log("click", e);
-      this.defaultSelectedKeys = e.keyPath;
-      localStorage.setItem("path", e.keyPath);
-    },
-  },
+  components: {},
+  watch: {},
+  mounted() {},
+  methods: {},
 };
 </script>
 

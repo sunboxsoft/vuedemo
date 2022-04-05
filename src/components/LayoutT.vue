@@ -1,63 +1,77 @@
 <template>
-  <a-layout id="components-layout-demo-custom-trigger">
-    <a-layout-sider v-model="collapsed" :trigger="null" collapsible>
-      <div class="logo" />
-      <a-menu theme="dark" mode="inline" :default-selected-keys="['1']">
-        <a-menu-item key="1">
-          <a-icon type="user" />
-          <span>nav 1</span>
-        </a-menu-item>
-        <a-menu-item key="2">
-          <a-icon type="video-camera" />
-          <span>nav 2</span>
-        </a-menu-item>
-        <a-menu-item key="3">
-          <a-icon type="upload" />
-          <span>nav 3</span>
-        </a-menu-item>
-      </a-menu>
-    </a-layout-sider>
-    <a-layout>
-      <a-layout-header style="background: #fff; padding: 0">
-        <a-icon
-          class="trigger"
-          :type="collapsed ? 'menu-unfold' : 'menu-fold'"
-          @click="() => (collapsed = !collapsed)"
-        />
-      </a-layout-header>
-      <a-layout-content
-        :style="{ margin: '24px 16px', padding: '24px', background: '#fff', minHeight: '280px' }"
-      >
-        Content
-      </a-layout-content>
-    </a-layout>
-  </a-layout>
+  <a-upload
+    name="avatar"
+    list-type="picture-card"
+    class="avatar-uploader"
+    :show-upload-list="false"
+    action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+    :before-upload="beforeUpload"
+    @change="handleChange"
+  >
+    <img v-if="imageUrl" :src="imageUrl" alt="avatar" />
+    <div v-else>
+      <a-icon :type="loading ? 'loading' : 'plus'" />
+      <div class="ant-upload-text">Upload</div>
+    </div>
+  </a-upload>
 </template>
+
 <script>
+function getBase64(img, callback) {
+  const reader = new FileReader();
+  reader.addEventListener("load", () => callback(reader.result));
+  reader.readAsDataURL(img);
+}
 export default {
+  name: "LayoutT",
   data() {
     return {
-      collapsed: false,
+      loading: false,
+      imageUrl: "",
     };
+  },
+  methods: {
+    handleChange(info) {
+      if (info.file.status === "uploading") {
+        this.loading = true;
+        return;
+      }
+      if (info.file.status === "done") {
+        // Get this url from response in real world.
+        getBase64(info.file.originFileObj, (imageUrl) => {
+          this.imageUrl = imageUrl;
+          this.loading = false;
+        });
+      }
+    },
+    beforeUpload(file) {
+      const isJpgOrPng =
+        file.type === "image/jpeg" || file.type === "image/png";
+      if (!isJpgOrPng) {
+        this.$message.error("You can only upload JPG file!");
+      }
+      this.$message.error(file.size / 1024 / 1024);
+      const isLt2M = file.size / 1024 / 1024 < 2;
+      if (!isLt2M) {
+        this.$message.error("Image must smaller than 2MB!");
+      }
+      return isJpgOrPng && isLt2M;
+    },
   },
 };
 </script>
 <style>
-#components-layout-demo-custom-trigger .trigger {
-  font-size: 18px;
-  line-height: 64px;
-  padding: 0 24px;
-  cursor: pointer;
-  transition: color 0.3s;
+.avatar-uploader > .ant-upload {
+  width: 128px;
+  height: 128px;
+}
+.ant-upload-select-picture-card i {
+  font-size: 32px;
+  color: #999;
 }
 
-#components-layout-demo-custom-trigger .trigger:hover {
-  color: #1890ff;
-}
-
-#components-layout-demo-custom-trigger .logo {
-  height: 32px;
-  background: rgba(255, 255, 255, 0.2);
-  margin: 16px;
+.ant-upload-select-picture-card .ant-upload-text {
+  margin-top: 8px;
+  color: #666;
 }
 </style>

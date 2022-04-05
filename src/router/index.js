@@ -18,10 +18,23 @@ export default new Router({
                 import ('../components/LayoutT.vue')
         },
         {
+
+            path: '/layouttest01',
+            name: 'LayoutTest01',
+            component: () =>
+                import ('../components/LayoutTest01.vue')
+        },
+        {
             path: '/spacet',
             name: 'SpaceT',
             component: () =>
                 import ('../components/SpaceT.vue')
+        },
+        {
+            path: '/testcomponent',
+            name: "TestComponent",
+            component: () =>
+                import ('../components/TestComponent.vue')
         }
     ]
 })
