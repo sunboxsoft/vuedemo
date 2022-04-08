@@ -1,14 +1,18 @@
 <template>
   <div id="app">
     <!-- <img src="./assets/logo.png"> -->
-    <router-view/>
+    <router-view />
+    AAABBB {{ $route }} {{ $route.meta.title }}BBB
+
+    {{ $route.path }}
+    {{ $route.name }}
   </div>
 </template>
 
 <script>
 export default {
-  name: 'App'
-}
+  name: "App",
+};
 </script>
 
 <style>
