@@ -46,6 +46,8 @@
       <p>Some contents...</p>
     </a-modal>
     <a-button @click="visible2 = true" type="primary">弹 全屏</a-button>
+    AAAAAAAAAAAA
+    <a-button @click="handleConfirm()" type="primary">confirm</a-button>
   </div>
 </template>
 
@@ -75,12 +77,25 @@ export default {
       console.log(e);
       visible2.value = false;
     },
+    handleConfirm() {
+      this.$confirm({
+        title: "确定删除?",
+        content: "",
+        okText: "确定",
+        cancelText: "取消",
+        okType: "primary",
+        centered: true,
+        onOk() {
+          alert("onOk");
+        },
+      });
+    },
   },
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style lang="less" scoped>
+<style lang="less">
 .full-modal {
   .ant-modal {
     max-width: 100%;
