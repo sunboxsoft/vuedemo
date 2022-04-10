@@ -10,6 +10,7 @@
         "build": "node build/build.js"
     },
     "dependencies": {
+        "@ant-design/icons-vue": "4.0.6",
         "ant-design-vue": "^1.7.8",
         "less": "3.12.2",
         "less-loader": "4.1.0",

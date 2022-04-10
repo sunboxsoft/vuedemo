@@ -6,9 +6,15 @@ import router from './router'
 
 import Antd from 'ant-design-vue';
 import 'ant-design-vue/dist/antd.css';
+// import * as Icons from "@ant-design/icons-vue";
+// import * as antIcons from '@ant-design/icons-vue'
+
 Vue.config.productionTip = false
 Vue.use(Antd);
-/* eslint-disable no-new */
+// Vue.use(antIcons)
+
+
+
 new Vue({
     el: '#app',
     router,
