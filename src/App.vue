@@ -2,10 +2,10 @@
   <div id="app">
     <!-- <img src="./assets/logo.png"> -->
     <router-view />
-    AAABBB {{ $route }} {{ $route.meta.title }}BBB
+    <!-- AAABBB {{ $route }} {{ $route.meta.title }}BBB
 
     {{ $route.path }}
-    {{ $route.name }}
+    {{ $route.name }} -->
   </div>
 </template>
 

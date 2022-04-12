@@ -1,64 +1,38 @@
 <template>
-  <a-table :columns="columns" :data-source="data">
-    <template #headerCell="{ column }">
-      <template v-if="column.key === 'name'">
-        <span>
-            {{column}}
-AAAAA
-          Name
-        </span>
-      </template>
-    </template>
-
-    <template #bodyCell="{ column, record }">
-      <template v-if="column.key === 'name'">
-        <a>
-          {{ record.name }}
-        </a>
-      </template>
-      <template v-else-if="column.key === 'tags'">
-        <span>
-          <a-tag
-            v-for="tag in record.tags"
-            :key="tag"
-            :color="
-              tag === 'loser'
-                ? 'volcano'
-                : tag.length > 5
-                ? 'geekblue'
-                : 'green'
-            "
-          >
-            {{ tag.toUpperCase() }}
-          </a-tag>
-        </span>
-      </template>
-      <template v-else-if="column.key === 'action'">
-        <span>
-          <a>Invite 一 {{ record.name }}</a>
-          <a-divider type="vertical" />
-          <a>Delete</a>
-          <a-divider type="vertical" />
-          <a class="ant-dropdown-link">
-            More actions
-            <down-outlined />
-          </a>
-        </span>
-      </template>
-    </template>
+  <a-table
+    :columns="columns"
+    :data-source="data"
+    rowKey="key"
+    :row-selection="rowSelection"
+  >
+    <span slot="name" slot-scope="name, r" @click="handleOk(r.key)">
+      {{ name }}
+      <!-- {{ name }} AAAAA{{ r }} -->
+      <!-- <hr /> -->
+    </span>
+    <span slot="time" slot-scope="time"> {{ time | formatTime(time) }} </span>
   </a-table>
 </template>
 
 <script>
+import moment from "moment";
 export default {
   name: "Table01",
   data() {
     return {
+      selectedTableRow: [],
       columns: [
         {
-          name: "Name",
+          title: "name",
           dataIndex: "name",
           key: "name",
+          scopedSlots: { customRender: "name" },
+        },
+        {
+          title: "时间",
+          dataIndex: "time",
+          align: "center",
+          scopedSlots: { customRender: "time" },
         },
         {
           title: "Age",
@@ -83,24 +57,27 @@ export default {
 
       data: [
         {
-          key: "1",
+          key: "11",
           name: "John Brown",
           age: 32,
           address: "New York No. 1 Lake Park",
+          time: 1636838400000,
           tags: ["nice", "developer"],
         },
         {
-          key: "2",
+          key: "22",
           name: "Jim Green",
           age: 42,
           address: "London No. 1 Lake Park",
+          time: 1626838400001,
           tags: ["loser"],
         },
         {
-          key: "3",
+          key: "33",
           name: "Joe Black",
           age: 32,
           address: "Sidney No. 1 Lake Park",
+          time: 1626838400002,
           tags: ["cool", "teacher"],
         },
       ],
@@ -109,7 +86,31 @@ export default {
   components: {},
   watch: {},
   mounted() {},
-  methods: {},
+  filters: {
+    formatTime(time) {
+      return moment(time).format("YYYY-MM-DD");
+    },
+  },
+  methods: {
+    handleOk(id) {
+      alert(id);
+    },
+  },
+  computed: {
+    rowSelection() {
+      return {
+        onChange: (selectedRowKeys, selectedRows) => {
+          this.selectedTableRow = selectedRowKeys;
+          console.log(
+            `selectedRowKeys: ${selectedRowKeys}`,
+            "selectedRows: ",
+            selectedRows
+          );
+        },
+        selectedRowKeys: this.selectedTableRow,
+      };
+    },
+  },
 };
 </script>
 

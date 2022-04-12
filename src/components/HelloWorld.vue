@@ -34,16 +34,18 @@
 
     <a-modal
       :visible="visible2"
-      title="Basic Modal"
+      title="表单设计器"
       @ok="handleOk"
       width="100%"
       @cancel="handleCancel"
       wrapClassName="full-modal"
       :maskClosable="true"
+      :closable="visible"
+      :ok-button-props="{ visible: false }"
+      :cancel-button-props="{ visible: false }"
     >
-      <p>Some contents...</p>
-      <p>Some contents...</p>
-      <p>Some contents...</p>
+      <test-b :id="111"></test-b>
+      <template #footer> </template>
     </a-modal>
     <a-button @click="visible2 = true" type="primary">弹 全屏</a-button>
   </div>
@@ -51,12 +53,13 @@
 
 <script>
 import GlobalModal from "./GlobalModal/GlobalModal.vue";
+import TestB from "./TestB.vue";
 export default {
-  components: { GlobalModal },
+  components: { GlobalModal, TestB },
   name: "HelloWorld",
   data() {
     return {
-      visible: true,
+      visible: false,
       visible1: false,
       visible2: false,
       confirmLoading: true,
@@ -81,7 +84,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="less" scoped>
-.full-modal {
+/deep/.full-modal {
   .ant-modal {
     max-width: 100%;
     top: 0;
