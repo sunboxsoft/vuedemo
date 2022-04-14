@@ -22,6 +22,12 @@ export default new Router({
             name: 'SpaceT',
             component: () =>
                 import ('../components/SpaceT.vue')
+        },
+        {
+            path: '/tabletest',
+            name: 'TableTest',
+            component: () =>
+                import ('../components/TableTest.vue')
         }
     ]
 })
