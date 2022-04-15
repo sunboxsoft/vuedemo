@@ -1,14 +1,26 @@
 <template>
   <div id="app">
     <!-- <img src="./assets/logo.png"> -->
-    <router-view/>
+    <router-view />
+
+    <a-space :size="size">
+      <a-button type="primary">Primary</a-button>
+      <a-button>Default</a-button>
+      <a-button type="dashed">Dashed</a-button>
+      <a-button type="link">Link</a-button>
+    </a-space>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'App'
-}
+  name: "App",
+  data() {
+    return {
+      size: 16,
+    };
+  },
+};
 </script>
 
 <style>
