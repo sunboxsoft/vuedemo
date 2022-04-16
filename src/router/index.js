@@ -22,6 +22,24 @@ export default new Router({
             name: 'SpaceT',
             component: () =>
                 import ('../components/SpaceT.vue')
+        },
+        {
+            path: '/ASelectT',
+            name: 'ASelectT',
+            component: () =>
+                import ('../components/ASelectT.vue')
+        },
+        {
+            path: '/ACascader',
+            name: 'ACascader',
+            component: () =>
+                import ('../components/ACascader.vue')
+        },
+        {
+            path: '/AMentionsT',
+            name: 'AMentionsT',
+            component: () =>
+                import ('../components/AMentionsT.vue')
         }
     ]
 })
